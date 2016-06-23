@@ -24,13 +24,13 @@
 # and analyses of open source projects.  Available at http://flossmole.org
 ################################################################
 # usage:
-# > python 1Bitcoin_DevCollector.py <new_datasource_id> <date-to-start> <password>
+# > python BitcoinDevEmailCollector.py <new_datasource_id> <date-to-start> <pw>
 #
 # THIS DATASOURCE IS THE NEXT ONE AVAIL IN THE DB - AND IT WILL GET INCREMENTED
 # DATE TO START is the oldest un-collected date;
 # the script will go through all months available
 # example usage:
-# > python 1Bitcoin_DevCollector.py 61260 20110614
+# > python BitcoinDevEmailCollector.py 61260 20110601
 #
 # purpose:
 # grab all the Dev emails from
@@ -64,17 +64,6 @@ if datasource_id and start_date:
     # ======
     # LOCAL
     # ======
-    try:
-        dbh1 = pymysql.connect(host='grid6.cs.elon.edu',
-                               database='test',
-                               user='eashwell',
-                               password=password,
-                               charset='utf8')
-
-    except pymysql.Error as err:
-        print(err) 
-    cursor1 = dbh1.cursor()
-
     try:
         dbh2 = pymysql.connect(host='grid6.cs.elon.edu',
                                database='bitcoin',
@@ -240,8 +229,8 @@ else:
     your commandline.")
     exit
 
-cursor1.close()
 cursor2.close()
+cursor3.close()
 
-dbh1.close()
 dbh2.close()
+dbh3.close()
