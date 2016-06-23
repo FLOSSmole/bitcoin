@@ -49,6 +49,8 @@ db1 = pymysql.connect(host="grid6.cs.elon.edu",
                       charset="utf8")
 cursor1 = db1.cursor()
 
+
+
 # Open local database connection 2
 db2 = pymysql.connect(host="grid6.cs.elon.edu",
                       user="megan",
