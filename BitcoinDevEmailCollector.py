@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 23 09:59:25 2016
-
-@author: megan
-"""
-
-# -*- coding: utf-8 -*-
 # This program is free software; you can redistribute it
 # and/or modify it under the same terms as Python itself.
 #
