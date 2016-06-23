@@ -2,8 +2,7 @@
 ## and/or modify it under the same terms as Perl.
 ## Please see the Perl Artistic License 2.0.
 ## 
-## Copyright (C) 2004-2015 Megan Squire <msquire@elon.edu>
-## Other contributors: Evan Ashwell
+## Copyright (C) 2004-2016 Megan Squire <msquire@elon.edu>
 ##
 ## We're working on this at http://flossmole.org - Come help us build 
 ## an open and accessible repository for data and analyses for open
@@ -18,15 +17,14 @@
 ##
 ## and
 ##
-## FLOSSmole (2004-2015) FLOSSmole: a project to provide academic access to data 
+## FLOSSmole (2004-2016) FLOSSmole: a project to provide academic access to data 
 ## and analyses of open source projects.  Available at http://flossmole.org 
 #
 ################################################################
 # usage:
-# 1getBitcoinDevIRCLogs.py 51313 20100922 password
-# 51313 in that example is the next available datasource_id in the database
+# 1getBitcoinDevIRCLogs.py 51313 20100922
+# 51313 in that example is hte next available datasource id in the database
 # 20100922 is the date to start with
-# password is a database password
 # purpose: 
 # grab all the IRC logs from http://bitcoinstats.com/irc/bitcoin-dev/logs/
 ################################################################
