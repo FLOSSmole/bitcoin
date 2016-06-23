@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Thu Jun 23 09:59:25 2016
+
+@author: megan
+"""
+
+# -*- coding: utf-8 -*-
 # This program is free software; you can redistribute it
 # and/or modify it under the same terms as Python itself.
 #
@@ -24,13 +31,13 @@
 # and analyses of open source projects.  Available at http://flossmole.org
 ################################################################
 # usage:
-# > python BitcoinDevEmailCollector.py <new_datasource_id> <date-to-start> <password>
+# > python 1Bitcoin_DevCollector.py <new_datasource_id> <date-to-start> <password>
 #
 # THIS DATASOURCE IS THE NEXT ONE AVAIL IN THE DB - AND IT WILL GET INCREMENTED
 # DATE TO START is the oldest un-collected date;
 # the script will go through all months available
 # example usage:
-# > python BitcoinDevEmailCollector.py 61260 20110614
+# > python 1Bitcoin_DevCollector.py 61260 20110614
 #
 # purpose:
 # grab all the Dev emails from
@@ -72,16 +79,12 @@ if datasource_id and start_date:
                                charset='utf8')
 
     except pymysql.Error as err:
-        print(err)
-    
+        print(err) 
     cursor1 = dbh1.cursor()
 
-    # =======
-    # REMOTE
-    # =======
     try:
-        dbh2 = pymysql.connect(host='flossdata.syr.edu',
-                               database='rubygems',
+        dbh2 = pymysql.connect(host='grid6.cs.elon.edu',
+                               database='bitcoin',
                                user='megan',
                                password=password,
                                charset='utf8')
@@ -89,7 +92,20 @@ if datasource_id and start_date:
         print(err)
     cursor2 = dbh2.cursor()
     
-    insertQuery = "INSERT INTO `bitcoin_dev_list`\
+    # =======
+    # REMOTE
+    # =======
+    try:
+        dbh3 = pymysql.connect(host='flossdata.syr.edu',
+                               database='bitcoin',
+                               user='megan',
+                               password=password,
+                               charset='utf8')
+    except pymysql.Error as err:
+        print(err)
+    cursor3 = dbh3.cursor()
+    
+    insertQuery = "INSERT INTO `bitcoindev_email`\
                 (`datasource_id`,\
                 `header`,\
                 `sender`,\
@@ -200,27 +216,27 @@ if datasource_id and start_date:
                     # LOCAL
                     # ======
                     try:
-                        cursor1.execute(insertQuery, (newDS, header, sender,
+                        cursor2.execute(insertQuery, (newDS, header, sender,
                                                       email, fullText,
                                                       secondURL, fileloc,
                                                       entryDate, currDate))
-                        dbh1.commit()
+                        dbh2.commit()
                     except pymysql.Error as error:
                         print(error)
-                        dbh1.rollback()
+                        dbh2.rollback()
 
                     # =======
                     # REMOTE
                     # =======
                     try:
-                        cursor2.execute(insertQuery, (newDS, header, sender,
+                        cursor3.execute(insertQuery, (newDS, header, sender,
                                                        email, fullText,
                                                        secondURL, fileloc,
                                                        entryDate, currDate))
-                        dbh2.commit()
+                        dbh3.commit()
                     except pymysql.Error as error:
                         print(error)
-                        dbh2.rollback()
+                        dbh3.rollback()
 
                     newDS = int(newDS) + 1
                     start_date = (start_date +
