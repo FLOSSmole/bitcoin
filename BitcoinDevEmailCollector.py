@@ -30,7 +30,7 @@
 # DATE TO START is the oldest un-collected date;
 # the script will go through all months available
 # example usage:
-# > python BitcoinDevEmailCollector.py 61260 20110601
+# > python BitcoinDevEmailCollector.py 64427 20110601
 #
 # purpose:
 # grab all the Dev emails from
@@ -92,7 +92,7 @@ if datasource_id and start_date:
                 `header`,\
                 `sender`,\
                 `email`,\
-                `text`,\
+                `msgtext`,\
                 `url`,\
                 `file_location`,\
                 `date_of_entry`,\
@@ -225,8 +225,7 @@ if datasource_id and start_date:
                       dateutil.relativedelta.relativedelta(months=1))
 
 else:
-    print("You need both a datasource_id and a date to start on\
-    your commandline.")
+    print("You need both a datasource_id and a date to start on your commandline.")
     exit
 
 cursor2.close()
